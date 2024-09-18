@@ -1,6 +1,0 @@
-{
-  "parent": "echochest:item/template_chest",
-  "textures": {
-    "particle": "minecraft:block/nether_bricks"
-  }
-}
