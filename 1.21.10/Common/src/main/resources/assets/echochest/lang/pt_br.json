@@ -1,0 +1,5 @@
+{
+  "block.echochest.echo_chest": "Baú do Eco",
+  "block.echochest.echo_chest.description": "Coleta itens e experiência deixados por mobs próximos em um raio de 8 blocos.",
+  "container.echo_chest": "Baú do Eco"
+}
