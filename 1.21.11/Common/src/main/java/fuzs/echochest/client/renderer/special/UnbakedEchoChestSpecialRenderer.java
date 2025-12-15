@@ -2,14 +2,14 @@ package fuzs.echochest.client.renderer.special;
 
 import com.mojang.serialization.MapCodec;
 import fuzs.echochest.client.renderer.blockentity.EchoChestRenderer;
-import net.minecraft.client.model.ChestModel;
+import net.minecraft.client.model.object.chest.ChestModel;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.special.ChestSpecialRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.client.resources.model.Material;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
-public record UnbakedEchoChestSpecialRenderer(ResourceLocation texture,
+public record UnbakedEchoChestSpecialRenderer(Identifier texture,
                                               float openness) implements SpecialModelRenderer.Unbaked {
     public static final MapCodec<UnbakedEchoChestSpecialRenderer> MAP_CODEC = ChestSpecialRenderer.Unbaked.MAP_CODEC.xmap(
             (ChestSpecialRenderer.Unbaked unbaked) -> new UnbakedEchoChestSpecialRenderer(unbaked.texture(),
@@ -17,7 +17,7 @@ public record UnbakedEchoChestSpecialRenderer(ResourceLocation texture,
             (UnbakedEchoChestSpecialRenderer unbaked) -> new ChestSpecialRenderer.Unbaked(unbaked.texture(),
                     unbaked.openness()));
 
-    public UnbakedEchoChestSpecialRenderer(ResourceLocation texture) {
+    public UnbakedEchoChestSpecialRenderer(Identifier texture) {
         this(texture, 0.0F);
     }
 

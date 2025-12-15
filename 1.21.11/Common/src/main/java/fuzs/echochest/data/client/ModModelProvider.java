@@ -12,7 +12,7 @@ import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.special.ChestSpecialRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -35,16 +35,16 @@ public class ModModelProvider extends AbstractModelProvider {
                 blockModelGenerators);
     }
 
-    public final void createChest(Block chestBlock, Block particleBlock, ResourceLocation texture, boolean useGiftTexture, Function<ResourceLocation, SpecialModelRenderer.Unbaked> unbakedRendererFactory, BlockModelGenerators blockModelGenerators) {
+    public final void createChest(Block chestBlock, Block particleBlock, Identifier texture, boolean useGiftTexture, Function<Identifier, SpecialModelRenderer.Unbaked> unbakedRendererFactory, BlockModelGenerators blockModelGenerators) {
         blockModelGenerators.createParticleOnlyBlock(chestBlock, particleBlock);
         Item item = chestBlock.asItem();
-        ResourceLocation resourceLocation = ModelTemplates.CHEST_INVENTORY.create(item,
+        Identifier identifier = ModelTemplates.CHEST_INVENTORY.create(item,
                 TextureMapping.particle(particleBlock),
                 blockModelGenerators.modelOutput);
-        ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(resourceLocation,
+        ItemModel.Unbaked unbaked = ItemModelUtils.specialModel(identifier,
                 unbakedRendererFactory.apply(texture));
         if (useGiftTexture) {
-            ItemModel.Unbaked unbaked2 = ItemModelUtils.specialModel(resourceLocation,
+            ItemModel.Unbaked unbaked2 = ItemModelUtils.specialModel(identifier,
                     unbakedRendererFactory.apply(ChestSpecialRenderer.GIFT_CHEST_TEXTURE));
             blockModelGenerators.itemModelOutput.accept(item, ItemModelUtils.isXmas(unbaked2, unbaked));
         } else {
