@@ -28,7 +28,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class EchoChestBlock extends EnderChestBlock implements TickingEntityBlock<EchoChestBlockEntity> {
     public static final EnumProperty<ChestType> TYPE = BlockStateProperties.CHEST_TYPE;

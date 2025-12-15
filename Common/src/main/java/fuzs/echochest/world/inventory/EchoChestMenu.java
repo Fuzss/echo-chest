@@ -2,7 +2,6 @@ package fuzs.echochest.world.inventory;
 
 import fuzs.echochest.init.ModRegistry;
 import fuzs.echochest.world.level.block.entity.EchoChestBlockEntity;
-import fuzs.puzzleslib.api.container.v1.ContainerMenuHelper;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -19,7 +18,10 @@ public class EchoChestMenu extends AbstractContainerMenu {
     private final ContainerData containerData;
 
     public EchoChestMenu(int containerId, Inventory inventory) {
-        this(containerId, inventory, new SimpleContainer(EchoChestBlockEntity.CONTAINER_SIZE), new SimpleContainerData(1));
+        this(containerId,
+                inventory,
+                new SimpleContainer(EchoChestBlockEntity.CONTAINER_SIZE),
+                new SimpleContainerData(1));
     }
 
     public EchoChestMenu(int containerId, Inventory inventory, Container container, ContainerData containerData) {
@@ -29,7 +31,7 @@ public class EchoChestMenu extends AbstractContainerMenu {
         this.containerData = containerData;
         container.startOpen(inventory.player);
         this.addContainerSlots();
-        ContainerMenuHelper.addInventorySlots(this, inventory, 118);
+        this.addStandardInventorySlots(inventory, 8, 118);
         this.addDataSlots(containerData);
     }
 

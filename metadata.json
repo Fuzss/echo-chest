@@ -1,0 +1,61 @@
+{
+    "mod": {
+        "id": "echochest",
+        "group": "fuzs.echochest",
+        "name": "Echo Chest",
+        "version": "21.11.0",
+        "authors": [
+            "Fuzs"
+        ],
+        "description": "A unique chest that collects all items dropped nearby. Very useful!",
+        "license": "MPL-2.0"
+    },
+    "dependencies": [
+        {
+            "name": "fabricapi",
+            "type": "required",
+            "platforms": [
+                "fabric"
+            ]
+        },
+        {
+            "name": "forgeconfigapiport",
+            "type": "required",
+            "platforms": [
+                "fabric"
+            ]
+        },
+        {
+            "name": "puzzleslib",
+            "type": "required",
+            "platforms": [
+                "fabric",
+                "neoforge"
+            ]
+        }
+    ],
+    "links": [
+        {
+            "name": "github",
+            "slug": "echochest"
+        },
+        {
+            "name": "curseforge",
+            "slug": "echo-chest",
+            "id": "857972"
+        },
+        {
+            "name": "modrinth",
+            "slug": "echo-chest",
+            "id": "m3pkVbY8"
+        }
+    ],
+    "environments": {
+        "client": "required",
+        "server": "required"
+    },
+    "platforms": [
+        "fabric",
+        "neoforge"
+    ]
+}
