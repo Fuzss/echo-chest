@@ -3,7 +3,7 @@
         "id": "echochest",
         "group": "fuzs.echochest",
         "name": "Echo Chest",
-        "version": "21.11.0",
+        "version": "21.11.1",
         "authors": [
             "Fuzs"
         ],
@@ -36,13 +36,13 @@
     ],
     "links": [
         {
-            "name": "github",
-            "slug": "echochest"
-        },
-        {
             "name": "curseforge",
             "slug": "echo-chest",
             "id": "857972"
+        },
+        {
+            "name": "github",
+            "slug": "echochest"
         },
         {
             "name": "modrinth",
