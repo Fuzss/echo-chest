@@ -150,6 +150,7 @@ public class EchoChestBlockEntity extends ChestBlockEntity implements WorldlyCon
         if (!this.trySaveLootTable(valueOutput)) {
             ContainerHelper.saveAllItems(valueOutput, this.getItems(), true);
         }
+
         valueOutput.putInt(TAG_EXPERIENCE, this.experience);
     }
 
@@ -169,9 +170,9 @@ public class EchoChestBlockEntity extends ChestBlockEntity implements WorldlyCon
     }
 
     @Override
-    public void stopOpen(ContainerUser player) {
-        if (!this.remove && !player.getLivingEntity().isSpectator()) {
-            this.openersCounter.decrementOpeners(player.getLivingEntity(),
+    public void stopOpen(ContainerUser containerUser) {
+        if (!this.remove && !containerUser.getLivingEntity().isSpectator()) {
+            this.openersCounter.decrementOpeners(containerUser.getLivingEntity(),
                     this.getLevel(),
                     this.getBlockPos(),
                     this.getBlockState());
@@ -186,23 +187,26 @@ public class EchoChestBlockEntity extends ChestBlockEntity implements WorldlyCon
     }
 
     @Override
-    public boolean canPlaceItem(int index, ItemStack stack) {
-        return index != 0 || EchoChestMenu.validBottleItem(stack);
+    public boolean canPlaceItem(int index, ItemStack itemStack) {
+        return index != 0 || EchoChestMenu.validBottleItem(itemStack);
     }
 
     @Override
-    public int[] getSlotsForFace(Direction side) {
-        return side.getAxis().getPlane() == Direction.Plane.HORIZONTAL ? this.allSlots : this.inventorySlots;
+    public int[] getSlotsForFace(Direction direction) {
+        // Vanilla seems to handle this mostly as a nullable value.
+        return direction != null && direction.getAxis().getPlane() == Direction.Plane.HORIZONTAL ? this.allSlots :
+                this.inventorySlots;
     }
 
     @Override
     public boolean canPlaceItemThroughFace(int index, ItemStack itemStack, @Nullable Direction direction) {
-        // don't allow picked up glass bottles to go into the bottles slot, would mess with witch farms where the player wants to farm xp (=wants to leave the xp tank filled)
+        // Don't allow picked-up glass bottles to go into the bottles slot.
+        // They would mess with witch farms where the player wants to farm xp (=wants to leave the xp tank filled)
         return (index != 0 || direction != null) && this.canPlaceItem(index, itemStack);
     }
 
     @Override
-    public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
+    public boolean canTakeItemThroughFace(int index, ItemStack itemStack, Direction direction) {
         return index != 0;
     }
 
