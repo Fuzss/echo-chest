@@ -1,6 +1,6 @@
 package fuzs.echochest.fabric;
 
-import fuzs.echochest.EchoChest;
+import fuzs.echochest.common.EchoChest;
 import fuzs.puzzleslib.common.api.core.v1.ModConstructor;
 import net.fabricmc.api.ModInitializer;
 

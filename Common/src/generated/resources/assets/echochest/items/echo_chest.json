@@ -7,7 +7,7 @@
           "type": "minecraft:special",
           "base": "echochest:item/echo_chest",
           "model": {
-            "type": "echochest:echo_chest",
+            "type": "minecraft:chest",
             "texture": "minecraft:christmas"
           }
         },

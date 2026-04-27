@@ -1,0 +1,77 @@
+package fuzs.echochest.common.client.gui.screens.inventory;
+
+import fuzs.echochest.common.EchoChest;
+import fuzs.echochest.common.world.inventory.EchoChestMenu;
+import fuzs.echochest.common.world.level.block.entity.EchoChestBlockEntity;
+import fuzs.puzzleslib.common.api.client.gui.v2.ScreenHelper;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.Items;
+
+public class EchoChestScreen extends AbstractContainerScreen<EchoChestMenu> {
+    private static final Identifier CONTAINER_BACKGROUND = EchoChest.id("textures/gui/container/echo_chest.png");
+    private static final Component EXPERIENCE_BOTTLE_NAME_COMPONENT = Component.translatable(Items.EXPERIENCE_BOTTLE.getDescriptionId());
+
+    public EchoChestScreen(EchoChestMenu chestMenu, Inventory inventory, Component component) {
+        super(chestMenu, inventory, component, 176, 200);
+        this.titleLabelY = 7;
+        this.inventoryLabelY = this.imageHeight - 93;
+    }
+
+    @Override
+    protected void extractLabels(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY) {
+        guiGraphics.text(this.font, this.title, this.titleLabelX, this.titleLabelY, 0xFFCFCFCF, false);
+        guiGraphics.text(this.font,
+                this.playerInventoryTitle,
+                this.inventoryLabelX,
+                this.inventoryLabelY,
+                0xFF404040,
+                false);
+    }
+
+    @Override
+    protected void extractTooltip(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY) {
+        if (this.isHovering(22, 31, 10, 38, mouseX, mouseY)) {
+            guiGraphics.setTooltipForNextFrame(this.font,
+                    Component.literal(
+                                    (int) (this.menu.getExperience() / EchoChestBlockEntity.EXPERIENCE_PER_BOTTLE) + "x ")
+                            .append(EXPERIENCE_BOTTLE_NAME_COMPONENT)
+                            .withStyle(ChatFormatting.YELLOW),
+                    mouseX,
+                    mouseY);
+        } else {
+            super.extractTooltip(guiGraphics, mouseX, mouseY);
+        }
+    }
+
+    @Override
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.extractBackground(guiGraphics, mouseX, mouseY, partialTick);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED,
+                CONTAINER_BACKGROUND,
+                this.leftPos,
+                this.topPos,
+                0,
+                0,
+                this.imageWidth,
+                this.imageHeight,
+                256,
+                256);
+        int height = (int) (this.menu.getExperience() / (float) EchoChestBlockEntity.MAX_EXPERIENCE * 40.0F);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED,
+                CONTAINER_BACKGROUND,
+                this.leftPos + 21,
+                this.topPos + 29 + 40 - height,
+                177,
+                1 + 40 - height,
+                12,
+                height,
+                256,
+                256);
+    }
+}

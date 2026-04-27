@@ -1,0 +1,33 @@
+package fuzs.echochest.common;
+
+import fuzs.echochest.common.init.ModRegistry;
+import fuzs.puzzleslib.common.api.core.v1.ModConstructor;
+import fuzs.puzzleslib.common.api.event.v1.BuildCreativeModeTabContentsCallback;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class EchoChest implements ModConstructor {
+    public static final String MOD_ID = "echochest";
+    public static final String MOD_NAME = "Echo Chest";
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
+
+    @Override
+    public void onConstructMod() {
+        ModRegistry.bootstrap();
+        registerLoadingHandlers();
+    }
+
+    private static void registerLoadingHandlers() {
+        BuildCreativeModeTabContentsCallback.buildCreativeModeTabContents(CreativeModeTabs.FUNCTIONAL_BLOCKS)
+                .register((CreativeModeTab creativeModeTab, CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) -> {
+                    output.accept(ModRegistry.ECHO_CHEST_ITEM.value());
+                });
+    }
+
+    public static Identifier id(String path) {
+        return Identifier.fromNamespaceAndPath(MOD_ID, path);
+    }
+}

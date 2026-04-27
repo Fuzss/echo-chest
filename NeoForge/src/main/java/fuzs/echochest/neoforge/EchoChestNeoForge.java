@@ -1,11 +1,11 @@
 package fuzs.echochest.neoforge;
 
-import fuzs.echochest.EchoChest;
-import fuzs.echochest.data.ModBlockLootProvider;
-import fuzs.echochest.data.ModRecipeProvider;
-import fuzs.echochest.data.tags.ModBlockTagsProvider;
-import fuzs.echochest.data.tags.ModGameEventTagsProvider;
-import fuzs.echochest.init.ModRegistry;
+import fuzs.echochest.common.EchoChest;
+import fuzs.echochest.common.data.ModBlockLootProvider;
+import fuzs.echochest.common.data.ModRecipeProvider;
+import fuzs.echochest.common.data.tags.ModBlockTagsProvider;
+import fuzs.echochest.common.data.tags.ModGameEventTagsProvider;
+import fuzs.echochest.common.init.ModRegistry;
 import fuzs.puzzleslib.common.api.core.v1.ModConstructor;
 import fuzs.puzzleslib.neoforge.api.data.v2.core.DataProviderHelper;
 import fuzs.puzzleslib.neoforge.api.init.v3.capability.NeoForgeCapabilityHelper;
