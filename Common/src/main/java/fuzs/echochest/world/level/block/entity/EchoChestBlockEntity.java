@@ -3,12 +3,13 @@ package fuzs.echochest.world.level.block.entity;
 import fuzs.echochest.EchoChest;
 import fuzs.echochest.init.ModRegistry;
 import fuzs.echochest.world.inventory.EchoChestMenu;
-import fuzs.puzzleslib.api.block.v1.entity.TickingBlockEntity;
+import fuzs.puzzleslib.common.api.block.v1.entity.TickingBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -20,6 +21,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.EnderChestBlock;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.entity.HopperBlockEntity;
@@ -74,37 +76,36 @@ public class EchoChestBlockEntity extends ChestBlockEntity implements WorldlyCon
     }
 
     @Override
-    public void clientTick() {
-        lidAnimateTick(this.getLevel(), this.getBlockPos(), this.getBlockState(), this);
+    public void clientTick(Level level, BlockPos blockPos, BlockState blockState) {
+        lidAnimateTick(level, blockPos, blockState, this);
     }
 
     @Override
-    public void serverTick() {
+    public void serverTick(ServerLevel serverLevel, BlockPos blockPos, BlockState blockState) {
         if (this.experience >= EXPERIENCE_PER_BOTTLE) {
             if (EchoChestMenu.validBottleItem(this.getItem(0)) && HopperBlockEntity.addItem(null,
                     this,
                     new ItemStack(Items.EXPERIENCE_BOTTLE),
                     null).isEmpty()) {
                 this.extractExperienceBottle();
-                ItemStack stack = this.getItem(0).copy();
-                stack.shrink(1);
-                this.setItem(0, stack);
+                ItemStack itemStack = this.getItem(0).copy();
+                itemStack.shrink(1);
+                this.setItem(0, itemStack);
             }
         }
     }
 
-    void animate() {
-        this.openersCounter.incrementOpeners(null, this.getLevel(), this.getBlockPos(), this.getBlockState());
+    void animate(ServerLevel serverLevel) {
+        this.openersCounter.incrementOpeners(null, serverLevel, this.getBlockPos(), this.getBlockState());
         if (!this.getBlockState().getValue(EnderChestBlock.WATERLOGGED)) {
-            this.getLevel()
-                    .playSound(null,
-                            this.getBlockPos().getX() + 0.5,
-                            this.getBlockPos().getY() + 0.5,
-                            this.getBlockPos().getZ() + 0.5,
-                            SoundEvents.DEEPSLATE_BRICKS_BREAK,
-                            SoundSource.BLOCKS,
-                            1.0F,
-                            this.getLevel().random.nextFloat() * 0.2F + 0.8F);
+            serverLevel.playSound(null,
+                    this.getBlockPos().getX() + 0.5,
+                    this.getBlockPos().getY() + 0.5,
+                    this.getBlockPos().getZ() + 0.5,
+                    SoundEvents.DEEPSLATE_BRICKS_BREAK,
+                    SoundSource.BLOCKS,
+                    1.0F,
+                    serverLevel.getRandom().nextFloat() * 0.2F + 0.8F);
         }
     }
 

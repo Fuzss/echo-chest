@@ -4,7 +4,7 @@ import fuzs.echochest.EchoChest;
 import fuzs.echochest.world.inventory.EchoChestMenu;
 import fuzs.echochest.world.level.block.entity.EchoChestBlockEntity;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
@@ -14,18 +14,18 @@ import net.minecraft.world.item.Items;
 
 public class EchoChestScreen extends AbstractContainerScreen<EchoChestMenu> {
     private static final Identifier CONTAINER_BACKGROUND = EchoChest.id("textures/gui/container/echo_chest.png");
+    private static final Component EXPERIENCE_BOTTLE_NAME_COMPONENT = Component.translatable(Items.EXPERIENCE_BOTTLE.getDescriptionId());
 
     public EchoChestScreen(EchoChestMenu chestMenu, Inventory inventory, Component component) {
-        super(chestMenu, inventory, component);
-        this.imageHeight = 200;
+        super(chestMenu, inventory, component, 176, 200);
         this.titleLabelY = 7;
         this.inventoryLabelY = this.imageHeight - 93;
     }
 
     @Override
-    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0xFFCFCFCF, false);
-        guiGraphics.drawString(this.font,
+    protected void extractLabels(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY) {
+        guiGraphics.text(this.font, this.title, this.titleLabelX, this.titleLabelY, 0xFFCFCFCF, false);
+        guiGraphics.text(this.font,
                 this.playerInventoryTitle,
                 this.inventoryLabelX,
                 this.inventoryLabelY,
@@ -34,23 +34,23 @@ public class EchoChestScreen extends AbstractContainerScreen<EchoChestMenu> {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
+    protected void extractTooltip(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY) {
         if (this.isHovering(21, 29, 12, 40, mouseX, mouseY)) {
             guiGraphics.setTooltipForNextFrame(this.font,
                     Component.literal(
                                     (int) (this.menu.getExperience() / EchoChestBlockEntity.EXPERIENCE_PER_BOTTLE) + "x ")
-                            .append(Items.EXPERIENCE_BOTTLE.getName())
+                            .append(EXPERIENCE_BOTTLE_NAME_COMPONENT)
                             .withStyle(ChatFormatting.YELLOW),
                     mouseX,
                     mouseY);
         } else {
-            this.renderTooltip(guiGraphics, mouseX, mouseY);
+            super.extractTooltip(guiGraphics, mouseX, mouseY);
         }
     }
 
     @Override
-    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.extractBackground(guiGraphics, mouseX, mouseY, partialTick);
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED,
                 CONTAINER_BACKGROUND,
                 this.leftPos,

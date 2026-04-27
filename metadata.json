@@ -1,9 +1,10 @@
 {
+    "minecraft": "26.1.2",
     "mod": {
         "id": "echochest",
         "group": "fuzs.echochest",
         "name": "Echo Chest",
-        "version": "21.11.1",
+        "version": "26.1.0",
         "authors": [
             "Fuzs"
         ],
@@ -42,7 +43,7 @@
         },
         {
             "name": "github",
-            "slug": "echochest"
+            "slug": "echo-chest"
         },
         {
             "name": "modrinth",

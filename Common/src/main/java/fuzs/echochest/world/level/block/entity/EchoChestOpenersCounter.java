@@ -30,7 +30,7 @@ class EchoChestOpenersCounter {
                 SoundEvents.CHEST_OPEN,
                 SoundSource.BLOCKS,
                 0.5F,
-                level.random.nextFloat() * 0.1F + 0.9F);
+                level.getRandom().nextFloat() * 0.1F + 0.9F);
     }
 
     protected void onClose(Level level, BlockPos pos, BlockState state) {
@@ -41,7 +41,7 @@ class EchoChestOpenersCounter {
                 SoundEvents.CHEST_CLOSE,
                 SoundSource.BLOCKS,
                 0.5F,
-                level.random.nextFloat() * 0.1F + 0.9F);
+                level.getRandom().nextFloat() * 0.1F + 0.9F);
     }
 
     protected void openerCountChanged(Level level, BlockPos pos, BlockState state, int count, int openCount) {

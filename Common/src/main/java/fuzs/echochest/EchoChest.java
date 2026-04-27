@@ -1,8 +1,8 @@
 package fuzs.echochest;
 
 import fuzs.echochest.init.ModRegistry;
-import fuzs.puzzleslib.api.core.v1.ModConstructor;
-import fuzs.puzzleslib.api.event.v1.BuildCreativeModeTabContentsCallback;
+import fuzs.puzzleslib.common.api.core.v1.ModConstructor;
+import fuzs.puzzleslib.common.api.event.v1.BuildCreativeModeTabContentsCallback;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;

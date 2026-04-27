@@ -6,10 +6,9 @@ import fuzs.echochest.client.renderer.blockentity.EchoChestRenderer;
 import fuzs.echochest.client.renderer.special.UnbakedEchoChestSpecialRenderer;
 import fuzs.echochest.init.ModRegistry;
 import fuzs.echochest.world.level.block.EchoChestBlock;
-import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
-import fuzs.puzzleslib.api.client.core.v1.context.*;
-import fuzs.puzzleslib.api.client.gui.v2.tooltip.ItemTooltipRegistry;
-import net.minecraft.client.renderer.special.ChestSpecialRenderer;
+import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
+import fuzs.puzzleslib.common.api.client.core.v1.context.*;
+import fuzs.puzzleslib.common.api.client.gui.v2.tooltip.ItemTooltipRegistry;
 
 public class EchoChestClient implements ClientModConstructor {
 
@@ -40,8 +39,8 @@ public class EchoChestClient implements ClientModConstructor {
     }
 
     @Override
-    public void onRegisterSpecialBlockModelRenderers(SpecialBlockModelRenderersContext context) {
-        context.registerSpecialBlockModelRenderer(ModRegistry.ECHO_CHEST_BLOCK.value(),
-                new ChestSpecialRenderer.Unbaked(EchoChestRenderer.ECHO_CHEST_TEXTURE));
+    public void onRegisterBuiltInBlockModels(BuiltInBlockModelsContext context) {
+        context.registerModelFactory(ModRegistry.ECHO_CHEST_BLOCK.value(),
+                UnbakedEchoChestSpecialRenderer.createXmasChest(EchoChestRenderer.ECHO_CHEST_TEXTURE));
     }
 }

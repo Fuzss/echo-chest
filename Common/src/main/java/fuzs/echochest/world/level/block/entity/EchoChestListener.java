@@ -43,21 +43,27 @@ final class EchoChestListener implements GameEventListener {
     }
 
     @Override
-    public boolean handleGameEvent(ServerLevel level, Holder<GameEvent> gameEvent, GameEvent.Context context, Vec3 pos) {
+    public boolean handleGameEvent(ServerLevel serverLevel, Holder<GameEvent> gameEvent, GameEvent.Context context, Vec3 pos) {
         if (this.isValidVibration(gameEvent, context)) {
-            Optional<Vec3> optional = this.getListenerSource().getPosition(level);
+            Optional<Vec3> optional = this.getListenerSource().getPosition(serverLevel);
             if (optional.isPresent()) {
                 Vec3 destination = optional.get();
-                if (VibrationSystem.Listener.isOccluded(level, pos, destination)) {
+                if (VibrationSystem.Listener.isOccluded(serverLevel, pos, destination)) {
                     return false;
-                } else if (!this.canReceiveVibration(level, BlockPos.containing(pos), gameEvent, context)) {
+                } else if (!this.canReceiveVibration(serverLevel, BlockPos.containing(pos), gameEvent, context)) {
                     return false;
                 } else {
-                    this.blockEntity.animate();
+                    this.blockEntity.animate(serverLevel);
                     int travelTimeInTicks = Mth.floor(pos.distanceTo(destination));
-                    level.sendParticles(new VibrationParticleOption(this.getListenerSource(), travelTimeInTicks), pos.x(),
-                            pos.y(), pos.z(), 1, 0.0, 0.0, 0.0, 0.0
-                    );
+                    serverLevel.sendParticles(new VibrationParticleOption(this.getListenerSource(), travelTimeInTicks),
+                            pos.x(),
+                            pos.y(),
+                            pos.z(),
+                            1,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0);
 
                     return true;
                 }
@@ -101,7 +107,8 @@ final class EchoChestListener implements GameEventListener {
             if (context.sourceEntity() instanceof LivingEntity livingEntity) {
                 if (this.blockEntity.canAcceptExperience() && !livingEntity.wasExperienceConsumed()) {
                     DamageSource damageSource = livingEntity.getLastDamageSource();
-                    int experienceReward = livingEntity.getExperienceReward(level, Optionull.map(damageSource, DamageSource::getEntity));
+                    int experienceReward = livingEntity.getExperienceReward(level,
+                            Optionull.map(damageSource, DamageSource::getEntity));
                     if (livingEntity.shouldDropExperience() && experienceReward > 0) {
                         this.blockEntity.acceptExperience(experienceReward);
                     }

@@ -2,8 +2,8 @@ package fuzs.echochest.world.level.block;
 
 import fuzs.echochest.init.ModRegistry;
 import fuzs.echochest.world.level.block.entity.EchoChestBlockEntity;
-import fuzs.puzzleslib.api.block.v1.entity.TickingEntityBlock;
-import fuzs.puzzleslib.api.util.v1.InteractionResultHelper;
+import fuzs.puzzleslib.common.api.block.v1.entity.TickingEntityBlock;
+import fuzs.puzzleslib.common.api.util.v1.InteractionResultHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
