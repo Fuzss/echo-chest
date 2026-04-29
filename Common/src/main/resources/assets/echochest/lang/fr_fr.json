@@ -1,0 +1,5 @@
+{
+  "block.echochest.echo_chest": "Écho de coffre",
+  "block.echochest.echo_chest.description": "Collecte des objets et de l'expérience des mobs tombés à proximité dans un rayon de 8 blocs.",
+  "container.echo_chest": "Coffre Écho"
+}
