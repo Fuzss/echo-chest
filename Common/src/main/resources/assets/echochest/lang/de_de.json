@@ -1,0 +1,5 @@
+{
+  "block.echochest.echo_chest": "Echo-Truhe",
+  "block.echochest.echo_chest.description": "Sammelt Gegenstände und Erfahrung von Mobs, die in einem Radius von 8 Blöcken in der Nähe fallen.",
+  "container.echo_chest": "Echo-Truhe"
+}
