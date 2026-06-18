@@ -3,7 +3,6 @@ package fuzs.echochest.common.client.gui.screens.inventory;
 import fuzs.echochest.common.EchoChest;
 import fuzs.echochest.common.world.inventory.EchoChestMenu;
 import fuzs.echochest.common.world.level.block.entity.EchoChestBlockEntity;
-import fuzs.puzzleslib.common.api.client.gui.v2.ScreenHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;

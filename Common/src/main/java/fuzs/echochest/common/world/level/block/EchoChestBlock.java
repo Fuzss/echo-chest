@@ -3,7 +3,6 @@ package fuzs.echochest.common.world.level.block;
 import fuzs.echochest.common.init.ModRegistry;
 import fuzs.echochest.common.world.level.block.entity.EchoChestBlockEntity;
 import fuzs.puzzleslib.common.api.block.v1.entity.TickingEntityBlock;
-import fuzs.puzzleslib.common.api.util.v1.InteractionResultHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -56,7 +55,7 @@ public class EchoChestBlock extends EnderChestBlock implements TickingEntityBloc
             }
             return InteractionResult.CONSUME;
         } else {
-            return InteractionResultHelper.sidedSuccess(level.isClientSide());
+            return InteractionResult.SUCCESS;
         }
     }
 
