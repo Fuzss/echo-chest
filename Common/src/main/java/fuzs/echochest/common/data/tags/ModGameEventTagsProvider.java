@@ -1,13 +1,13 @@
 package fuzs.echochest.common.data.tags;
 
 import fuzs.echochest.common.init.ModRegistry;
-import fuzs.puzzleslib.common.api.data.v2.core.DataProviderContext;
-import fuzs.puzzleslib.common.api.data.v2.tags.AbstractTagProvider;
+import fuzs.puzzleslib.common.api.data.v3.core.DataProviderContext;
+import fuzs.puzzleslib.common.api.data.v3.tags.AbstractTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.gameevent.GameEvent;
 
-public class ModGameEventTagsProvider extends AbstractTagProvider<GameEvent> {
+public class ModGameEventTagsProvider extends AbstractTagsProvider<GameEvent> {
 
     public ModGameEventTagsProvider(DataProviderContext context) {
         super(Registries.GAME_EVENT, context);

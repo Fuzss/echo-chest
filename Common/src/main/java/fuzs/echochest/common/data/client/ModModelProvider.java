@@ -3,9 +3,9 @@ package fuzs.echochest.common.data.client;
 import fuzs.echochest.common.client.renderer.blockentity.EchoChestRenderer;
 import fuzs.echochest.common.client.renderer.special.UnbakedEchoChestSpecialRenderer;
 import fuzs.echochest.common.init.ModRegistry;
-import fuzs.puzzleslib.common.api.client.data.v2.AbstractModelProvider;
-import fuzs.puzzleslib.common.api.client.data.v2.models.ItemModelGenerationHelper;
-import fuzs.puzzleslib.common.api.data.v2.core.DataProviderContext;
+import fuzs.puzzleslib.common.api.client.data.v3.models.AbstractModelProvider;
+import fuzs.puzzleslib.common.api.client.data.v3.models.ItemModelGenerationHelper;
+import fuzs.puzzleslib.common.api.data.v3.core.DataProviderContext;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.world.level.block.Blocks;
 
